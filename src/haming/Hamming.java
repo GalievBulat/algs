@@ -9,43 +9,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Hamming {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        System.out.print("Write a mode: ");
-        String mode = scan.nextLine().toLowerCase();
-        System.out.println();
-        handleMode(mode);
-    }
-
-    private static void handleMode(String mode) {
-        String readFrom;
-        String writeTo = "";
-        byte[] bytes = new byte[0];
-        switch (mode.toLowerCase()) {
-            case "encode":
-                readFrom = "G:/HDDStorage/dd.txt";
-                writeTo = "G:/HDDStorage/hm";
-                bytes = encode(readFile(readFrom));
-                break;
-            case "send":
-                readFrom = "encoded.txt";
-                writeTo = "received.txt";
-                bytes = simulateErrors(readFile(readFrom));
-                break;
-            case "decode":
-                readFrom = "G:/HDDStorage/hm";
-                writeTo = "G:/HDDStorage/hmDD.txt";
-                bytes = decodeString(readFile(readFrom));
-                break;
-            default:
-                System.out.println("Unrecognized mode");
-                break;
-        }
-        writeFile(writeTo, bytes);
-    }
-
-
-
 
     public static byte[] encode(byte[] bytes) {
         byte[] encodedBytes = new  byte[bytes.length * 2];
@@ -182,26 +145,4 @@ public class Hamming {
         return decodedBin;
     }
 
-
-
-
-    private static byte[] readFile(String inputFile) {
-        byte[] bytes = new byte[0];
-        try (InputStream inputStream = new FileInputStream(inputFile)) {
-            bytes = IOUtils.toByteArray(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return bytes;
-    }
-
-    private static void writeFile(String outputFile, byte[] bytes) {
-        try (OutputStream outputStream = new FileOutputStream(outputFile)) {
-            outputStream.write(bytes);
-            outputStream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

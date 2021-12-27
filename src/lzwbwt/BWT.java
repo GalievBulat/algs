@@ -7,7 +7,6 @@ public final class BWT {
         for (int i = 0; i < strs.length; ++i) {
             strs[i] = rawString.substring(i) + rawString.substring(0, i);
         }
-
         java.util.Arrays.sort(strs);
 
         StringBuilder builder = new StringBuilder();
@@ -28,9 +27,6 @@ public final class BWT {
             return string.charAt(i) - string.charAt(j);
         }
 
-        public boolean equals(Integer i, Integer j) {
-            return string.charAt(i) == string.charAt(j);
-        }
     }
 
     public static String decode(String encodedString) {
